@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #eef2f3;
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+}
+
+h1 {
+  margin: 20px;
+  text-align: center;
+}
+
+#resetBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#reader {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  margin-top: 80px;
+  position: relative;
+  pointer-events: none; /* Make unclickable */
+  user-select: none; /* Prevent text/image selection */
+}
+
+#reader img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-drag: none; /* Prevent dragging image */
+  -webkit-user-drag: none; /* Safari */
+  pointer-events: none; /* Also prevent events on image */
+}
+
+/* Cards container */
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 50px;
+  position: relative;
+}
+
+.card {
+  width: 100px;
+  height: 60px;
+  background: #2196f3;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  position: absolute;
+  transition: left 0.3s, top 0.3s;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RFID Reader Simulation</title>
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body oncontextmenu="return false;"> <!-- Disable right-click globally -->
+
+  <h1>RFID Reader Simulation</h1>
+  <button id="resetBtn">Reset Cards</button>
+
+  <div id="reader">
+    <!-- <img src="/images/arduino.png" alt="RFID Reader"> -->
+    <img src="{{ url_for('static', filename='images/arduino.png') }}" alt="RFID Reader">
+  </div>
+
+  <!-- Cards Container -->
+  <div class="cards-container" id="cardsContainer">
+    <div class="card" id="card1">Card 1</div>
+    <div class="card" id="card2">Card 2</div>
+    <div class="card" id="card3">Card 3</div>
+    <div class="card" id="card4">Card 4</div>
+    <div class="card" id="card5">Card 5</div>
+  </div>
+
+  <!-- <script src="script.js"></script> -->
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>
