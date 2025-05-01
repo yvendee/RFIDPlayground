@@ -79,24 +79,24 @@ function checkCollision(card) {
     cardRect.top < readerRect.bottom &&
     cardRect.bottom > readerRect.top
   ) {
-    const info = cardInfo[card.id];
+    const cardData = cardInfo[card.id];
+
     alert(`${card.innerText} detected by RFID Reader!`);
 
-    // Send API request
-    fetch('http://152.42.247.62:9000/log_karen_attendance', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(info)
-    }).then(res => res.json())
+    // Send GET request to /read?name=xxxx
+    fetch(`/read?name=${encodeURIComponent(cardData.name)}`)
+      .then(response => response.text())
       .then(data => {
-        console.log('API Response:', data);
-      }).catch(err => {
-        console.error('API Error:', err);
+        console.log('Server response:', data);
+      })
+      .catch(error => {
+        console.error('Error calling /read:', error);
       });
 
     const cardIndex = parseInt(card.id.replace('card', '')) - 1;
     card.style.left = initialPositions[cardIndex].left + 'px';
     card.style.top = initialPositions[cardIndex].top + 'px';
+
     draggingCard = null;
   }
 }
