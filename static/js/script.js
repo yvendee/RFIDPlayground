@@ -5,6 +5,14 @@ const cardsContainer = document.getElementById('cardsContainer');
 
 const initialPositions = [];
 
+const cardInfo = {
+  card1: { name: '00001', section: 'A', status: 'IN' },
+  card2: { name: '00002', section: 'A', status: 'IN' },
+  card3: { name: '00003', section: 'A', status: 'IN' },
+  card4: { name: '00004', section: 'A', status: 'IN' },
+  card5: { name: '00005', section: 'A', status: 'IN' }
+};
+
 function setInitialPositions() {
   const containerRect = cardsContainer.getBoundingClientRect();
   const centerX = containerRect.width / 2;
@@ -71,14 +79,24 @@ function checkCollision(card) {
     cardRect.top < readerRect.bottom &&
     cardRect.bottom > readerRect.top
   ) {
-
+    const info = cardInfo[card.id];
     alert(`${card.innerText} detected by RFID Reader!`);
-    
-    
+
+    // Send API request
+    fetch('http://152.42.247.62:9000/log_karen_attendance', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(info)
+    }).then(res => res.json())
+      .then(data => {
+        console.log('API Response:', data);
+      }).catch(err => {
+        console.error('API Error:', err);
+      });
+
     const cardIndex = parseInt(card.id.replace('card', '')) - 1;
     card.style.left = initialPositions[cardIndex].left + 'px';
     card.style.top = initialPositions[cardIndex].top + 'px';
-
     draggingCard = null;
   }
 }
@@ -91,5 +109,4 @@ resetBtn.addEventListener('click', () => {
 });
 
 window.addEventListener('resize', setInitialPositions);
-
 setInitialPositions();
